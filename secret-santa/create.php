@@ -3,17 +3,29 @@
 
 $received_data = json_decode(file_get_contents("php://input"));
 
+function mysql_escape_mimic($inp)
+{
+    if (is_array($inp))
+        return array_map(__METHOD__, $inp);
+
+    if (!empty($inp) && is_string($inp)) {
+        return str_replace(array('\\', "\0", "\n", "\r", "'", '"', "\x1a"), array('\\\\', '\\0', '\\n', '\\r', "\\'", '\\"', '\\Z'), $inp);
+    }
+
+    return $inp;
+}
+
 function has_duplicate($received_data, $ignore, $connect)
 {
 	$data = array();
-	$query = "SELECT * FROM `" . $received_data->table . "`";
+	$query = "SELECT * FROM `" . mysql_escape_mimic($received_data->table) . "`";
 	$i = 0;
 	foreach ($received_data->query as $key => $value) {
 		if (!in_array($key, $ignore)) {
 			if ($i++ == 0) {
-				$query .= "WHERE `" . $key . "` = '" . $value . "' ";
+				$query .= "WHERE `" . mysql_escape_mimic($key) . "` = '" . mysql_escape_mimic($value) . "' ";
 			} else {
-				$query .= "AND `" . $key . "` = '" . $value . "' ";
+				$query .= "AND `" . mysql_escape_mimic($key) . "` = '" . mysql_escape_mimic($value) . "' ";
 			}
 		}
 	}
@@ -29,7 +41,7 @@ function has_duplicate($received_data, $ignore, $connect)
 
 function get_pass_by_id($id, $connect)
 {
-	$query = "SELECT * FROM `ss_members` WHERE `id` = '" . $id . "' ORDER BY id DESC";
+	$query = "SELECT * FROM `ss_members` WHERE `id` = '" . mysql_escape_mimic($id) . "' ORDER BY id DESC";
 	$statement = $connect->prepare($query);
 	$statement->execute();
 	$data = $statement->fetch(PDO::FETCH_ASSOC);
@@ -41,7 +53,7 @@ function get_member_data($id, $connect)
 {
 
 	$query = "
-	SELECT * FROM `ss_members` WHERE `id` = '" . $id . "' ORDER BY id DESC";
+	SELECT * FROM `ss_members` WHERE `id` = '" . mysql_escape_mimic($id) . "' ORDER BY id DESC";
 	$statement = $connect->prepare($query);
 	$statement->execute();
 	$data = $statement->fetch(PDO::FETCH_ASSOC);
@@ -65,15 +77,15 @@ function insert($received_data, $ignore, $connect)
 			'response' => false,
 		];
 	} else {
-		$query = "INSERT INTO " . $received_data->table;
+		$query = "INSERT INTO " . mysql_escape_mimic($received_data->table);
 		$keys = '';
 		$values = '';
 		foreach ($received_data->query as $key => $value) {
-			$keys .= "`" . $key . "`, ";
+			$keys .= "`" . mysql_escape_mimic($key) . "`, ";
 			if ($value == "DEFAULT") {
 				$values .= "DEFAULT, ";
 			} else {
-				$values .= "'" . $value . "', ";
+				$values .= "'" . mysql_escape_mimic($value) . "', ";
 			}
 		}
 		$query .= " (" . substr($keys, 0, -2) . ") VALUES (" . substr($values, 0, -2) . ")";
