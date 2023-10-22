@@ -1,0 +1,337 @@
+[
+    {
+        "routeName": "",
+        "routeType": "default",
+        "className": "main\\Main",
+        "contants": [
+            {
+                "routeName": "admin",
+                "routeType": "default",
+                "className": "admin\\Admin",
+                "contants": [
+                    {
+                        "routeName": "items",
+                        "routeType": "default",
+                        "className": "admin\\Items",
+                        "contants": []
+                    }
+                ]
+            },
+            {
+                "routeName": "documents",
+                "routeType": "default",
+                "className": "main\\Main",
+                "contants": [
+                    {
+                        "routeName": "privacy",
+                        "routeType": "default",
+                        "className": "documents\\Privacy",
+                        "contants": []
+                    },
+                    {
+                        "routeName": "faq",
+                        "routeType": "default",
+                        "className": "documents\\FAQ",
+                        "contants": []
+                    }
+                ]
+            },
+            {
+                "routeName": "register",
+                "routeType": "default",
+                "className": "login\\Register",
+                "contants": [
+                    {
+                        "routeName": "validate",
+                        "routeType": "default",
+                        "className": "login\\ValidateRegister",
+                        "contants": []
+                    },
+                    {
+                        "routeName": "confirm_email",
+                        "routeType": "default",
+                        "className": "login\\ConfirmRegister",
+                        "contants": []
+                    }
+                ]
+            },
+            {
+                "routeName": "account_change",
+                "routeType": "default",
+                "className": "login\\AccountChange",
+                "contants": [
+                    {
+                        "routeName": "validate",
+                        "routeType": "default",
+                        "className": "login\\ValidateChange",
+                        "contants": []
+                    }
+                ]
+            },
+            {
+                "routeName": "login",
+                "routeType": "default",
+                "className": "login\\Login",
+                "contants": [
+                    {
+                        "routeName": "validate",
+                        "routeType": "default",
+                        "className": "login\\Validate",
+                        "contants": []
+                    }
+                ]
+            },
+            {
+                "routeName": "logout",
+                "routeType": "default",
+                "className": "login\\Logout",
+                "contants": []
+            },
+            {
+                "routeName": "be",
+                "routeType": "default",
+                "className": "",
+                "contants": [
+                    {
+                        "routeName": "items",
+                        "routeType": "default",
+                        "className": "",
+                        "contants": [
+                            {
+                                "routeName": "get_items",
+                                "routeType": "default",
+                                "className": "items\\GetItems",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "get_item",
+                                "routeType": "default",
+                                "className": "items\\GetItem",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "get_similar_items",
+                                "routeType": "default",
+                                "className": "items\\GetSimilarItems",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "get_labels",
+                                "routeType": "default",
+                                "className": "items\\GetLabels",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "insert_items",
+                                "routeType": "default",
+                                "className": "items\\InsertItems",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "get_shopping_list",
+                                "routeType": "default",
+                                "className": "items\\GetShoppingList",
+                                "contants": []
+                            }
+                        ]
+                    },
+                    {
+                        "routeName": "categories",
+                        "routeType": "default",
+                        "className": "",
+                        "contants": [
+                            {
+                                "routeName": "get_categories",
+                                "routeType": "default",
+                                "className": "categories\\GetCategories",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "insert_categories",
+                                "routeType": "default",
+                                "className": "categories\\InsertCategories",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "get_and_insert_categories_to_db",
+                                "routeType": "default",
+                                "className": "categories\\GetCategoriesFromShopAndInsertToDB",
+                                "contants": []
+                            }
+                        ]
+                    },
+                    {
+                        "routeName": "packages",
+                        "routeType": "default",
+                        "className": "",
+                        "contants": [
+                            {
+                                "routeName": "get_packages",
+                                "routeType": "default",
+                                "className": "packages\\GetPackages",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "insert_packages",
+                                "routeType": "default",
+                                "className": "packages\\InsertPackages",
+                                "contants": []
+                            }
+                        ]
+                    },
+                    {
+                        "routeName": "brands",
+                        "routeType": "default",
+                        "className": "",
+                        "contants": [
+                            {
+                                "routeName": "get_brands",
+                                "routeType": "default",
+                                "className": "brands\\GetBrands",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "insert_brands",
+                                "routeType": "default",
+                                "className": "brands\\InsertBrands",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "get_brand_alert",
+                                "routeType": "default",
+                                "className": "brands\\GetBrandAlert",
+                                "contants": []
+                            }
+                        ]
+                    },
+                    {
+                        "routeName": "consists",
+                        "routeType": "default",
+                        "className": "",
+                        "contants": [
+                            {
+                                "routeName": "get_consists",
+                                "routeType": "default",
+                                "className": "consists\\GetConsists",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "insert_consists",
+                                "routeType": "default",
+                                "className": "consists\\InsertConsists",
+                                "contants": []
+                            }
+                        ]
+                    },
+                    {
+                        "routeName": "countries",
+                        "routeType": "default",
+                        "className": "",
+                        "contants": [
+                            {
+                                "routeName": "get_countries",
+                                "routeType": "default",
+                                "className": "countries\\GetCountries",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "insert_countries",
+                                "routeType": "default",
+                                "className": "countries\\InsertCountries",
+                                "contants": []
+                            }
+                        ]
+                    },
+                    {
+                        "routeName": "prices",
+                        "routeType": "default",
+                        "className": "",
+                        "contants": [
+                            {
+                                "routeName": "update_prices",
+                                "routeType": "default",
+                                "className": "prices\\UpdatePrices",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "analize_prices",
+                                "routeType": "default",
+                                "className": "prices\\AnalizePrices",
+                                "contants": []
+                            }
+                        ]
+                    },
+                    {
+                        "routeName": "filials",
+                        "routeType": "default",
+                        "className": "",
+                        "contants": [
+                            {
+                                "routeName": "get_filials",
+                                "routeType": "default",
+                                "className": "filials\\GetFilials",
+                                "contants": []
+                            }
+                        ]
+                    },
+                    {
+                        "routeName": "shops",
+                        "routeType": "default",
+                        "className": "",
+                        "contants": [
+                            {
+                                "routeName": "get_shops",
+                                "routeType": "default",
+                                "className": "shops\\GetShops",
+                                "contants": []
+                            }
+                        ]
+                    },
+                    {
+                        "routeName": "user",
+                        "routeType": "default",
+                        "className": "",
+                        "contants": [
+                            {
+                                "routeName": "get_user_info",
+                                "routeType": "default",
+                                "className": "user\\GetUserInfo",
+                                "contants": []
+                            }
+                        ]
+                    },
+                    {
+                        "routeName": "login",
+                        "routeType": "default",
+                        "className": "login\\Login",
+                        "contants": []
+                    },
+                    {
+                        "routeName": "logout",
+                        "routeType": "default",
+                        "className": "login\\Logout",
+                        "contants": []
+                    },
+                    {
+                        "routeName": "register",
+                        "routeType": "default",
+                        "className": "login\\Register",
+                        "contants": []
+                    },
+                    {
+                        "routeName": "change_account",
+                        "routeType": "default",
+                        "className": "login\\ChangeAccount",
+                        "contants": []
+                    },
+                    {
+                        "routeName": "check_version",
+                        "routeType": "default",
+                        "className": "version\\CheckVersion",
+                        "contants": []
+                    }
+                ]
+            }
+        ]
+    }
+]
