@@ -17,6 +17,7 @@ class UsersController extends BaseEndpoint
     {
         return [
             'method' => "",
+            'user' => null
         ];
     }
     public function build()
@@ -24,5 +25,9 @@ class UsersController extends BaseEndpoint
         if ($this->getParam('method') == "generateUser") {
             return $this->_usersService->generateUser();
         }
+        elseif ($this->getParam('method') == "isUserExists") {
+            return $this->_usersService->isUserExists($this->getParam('user'));
+        }
+
     }
 }

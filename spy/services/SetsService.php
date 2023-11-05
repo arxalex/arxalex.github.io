@@ -1,0 +1,108 @@
+<?php
+
+namespace services;
+
+use models\Set;
+use models\User;
+use models\Word;
+use repository\SetsRepository;
+use repository\WordsRepository;
+use stdClass;
+
+class SetsService
+{
+    private UsersService $_usersService;
+    private SetsRepository $_setsRepository;
+    private WordsRepository $_wordsRepository;
+
+    public function __construct(string $systemPath)
+    {
+        $this->_setsRepository = new SetsRepository();
+        $this->_setsRepository->systemPath = $systemPath;
+        $this->_wordsRepository = new WordsRepository();
+        $this->_wordsRepository->systemPath = $systemPath;
+        $this->_usersService = new UsersService($systemPath);
+    }
+
+    public function getSet(int $setId): object
+    {
+        $set = $this->_setsRepository->getItemFromDB($setId);
+        $words = $this->_wordsRepository->getItemsFromDB(['setid' => [$setId]]);
+        $result = new stdClass();
+
+        $result->set = $set;
+        $result->words = $words;
+
+        return $result;
+    }
+
+    public function createSet(string $name, User $user): ?Set
+    {
+        if ($this->_usersService->isUserExists($user)) {
+            $set = new Set(null, $name, $user->id);
+            $this->_setsRepository->insertItemToDB($set);
+            return $this->_setsRepository->getLastInsertedItem();
+        }
+
+        return null;
+    }
+
+    public function updateSet(Set $set, array $words, User $user): ?object
+    {
+        if ($this->isUserOwner($set, $user)) {
+            $this->_setsRepository->updateItemInDB($set);
+            foreach ($words as $value) {
+                if ($value->id == null) {
+                    $word = new Word(null, $set->id, $value->word);
+                    $this->_wordsRepository->insertItemToDB($word);
+                } elseif ($this->validateWord($value, $set)) {
+                    $this->_wordsRepository->updateItemInDB($$value);
+                }
+            }
+
+            return $this->getSet($set->id);
+        }
+
+        return null;
+    }
+
+    public function deleteSet(int $setId, User $user): bool
+    {
+        $setAndWords = $this->getSet($setId);
+        if ($this->isUserOwner($setAndWords->set, $user)) {
+            $words = $setAndWords->words;
+            foreach ($words as $word) {
+                $this->_wordsRepository->deleteItem($word);
+            }
+            $this->_setsRepository->deleteItem($setAndWords->set);
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isUserOwner(Set $set, User $user): bool
+    {
+        if ($this->_usersService->isUserExists($user)) {
+            $setFromDB = $this->_setsRepository->getItemFromDB($set->id);
+            return $setFromDB->userid == $user->id && $set->userid == $user->id;
+        }
+        return false;
+    }
+
+    public function getWord(int $id)
+    {
+        return $this->_wordsRepository->getItemFromDB($id);
+    }
+
+    public function validateWord(Word $word, Set $set)
+    {
+        $wordFromDb = $this->getWord($word->id);
+        return $word->setid == $wordFromDb->setid && $set->id == $word->setid;
+    }
+
+    public function getRandomWord(object $setAndWords): Word
+    {
+        return $setAndWords->words[rand(0, count($setAndWords->words) - 1)];
+    }
+}

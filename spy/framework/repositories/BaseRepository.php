@@ -6,7 +6,6 @@ use framework\database\DatabaseRequest;
 use framework\utils\NumericHelper;
 use framework\utils\SqlHelper;
 use PDO;
-use stdClass;
 
 abstract class BaseRepository
 {
@@ -72,60 +71,8 @@ abstract class BaseRepository
         SET " . SqlHelper::updateObject($item)
             . " WHERE " . SqlHelper::whereCreate([
                 'id' => [$item->id]
-            ]);            
+            ]);
         return (new DatabaseRequest($query, self::$systemPath))->execute();
-    }
-    public function orderItemsByRate(array $items, array $rates, int $max = null): array
-    {
-        $count = count($rates);
-        if ($count <= 1) {
-            return $items;
-        }
-
-        for ($i = 1; $i < $count; $i++) {
-            $tempRate = $rates[$i];
-            $tempItem = $items[$i];
-            $j = $i - 1;
-
-            while (isset($rates[$j]) && $rates[$j] < $tempRate) {
-                $rates[$j + 1] = $rates[$j];
-                $rates[$j] = $tempRate;
-                $items[$j + 1] = $items[$j];
-                $items[$j] = $tempItem;
-                $j--;
-            }
-        }
-        if ($max === null) {
-            return $items;
-        }
-        $result = [];
-
-        $max = min($max, count($items));
-
-        for ($i = 0; $i < $max; $i++) {
-            $result[] = $items[$i];
-        }
-        return $result;
-    }
-    public function getColumn(array $objects, string $key): array
-    {
-        $result = [];
-        foreach ($objects as $object) {
-            $result[] = $object->$key;
-        }
-        return $result;
-    }
-    public function getColumns(array $objects, array $keys): array
-    {
-        $result = [];
-        foreach ($objects as $object) {
-            $temp = new stdClass();
-            foreach ($keys as $key) {
-                $temp->$key = $object->$key;
-            }
-            $result[] = $temp;
-        }
-        return $result;
     }
     public function deleteItem($item): bool
     {
@@ -135,7 +82,7 @@ abstract class BaseRepository
         ]);
         return (new DatabaseRequest($query, self::$systemPath))->execute();
     }
-    public function count(array $where = []) : int
+    public function count(array $where = []): int
     {
         $table = $this->tableName;
         if (count($where) != 0) {
