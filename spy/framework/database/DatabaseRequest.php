@@ -3,6 +3,7 @@
 namespace framework\database;
 
 use framework\models\BaseModel;
+use framework\utils\ConstantsHelper;
 use PDO;
 
 class DatabaseRequest
@@ -10,9 +11,9 @@ class DatabaseRequest
     private PDO $connection;
     private $statement;
 
-    public function __construct(string $query, string $systemPath)
+    public function __construct(string $query)
     {
-        $config = json_decode(file_get_contents("$systemPath/config.json"));
+        $config = json_decode(file_get_contents(ConstantsHelper::SYSTEM_PATH . "/config.json"));
         $this->connection = new PDO(
             "mysql:host=$config->DB_host; dbname=$config->DB_dbname; charset=utf8",
             $config->DB_username,

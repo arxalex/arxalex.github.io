@@ -2,13 +2,13 @@
 
 namespace framework\routing;
 
+use framework\utils\ConstantsHelper;
+
 class Router
 {
-    private const MODULES_NAMESPACE = "controllers\\";
-
-    public static function resolveRoute(string $uri_string, string $systemPath)
+    public static function resolveRoute(string $uri_string)
     {
-        $routeRegistrer = new RouteRegister("$systemPath/routes.json");
+        $routeRegistrer = new RouteRegister(ConstantsHelper::SYSTEM_PATH . "/routes.json");
         $class = $routeRegistrer->getClassByRoute($uri_string);
 
         if ($class == null) {
@@ -17,9 +17,8 @@ class Router
         } else {
             $params = json_decode(file_get_contents("php://input"), true);
 
-            $className = self::MODULES_NAMESPACE . $class['className'];
+            $className = $class['className'];
             $classObject = new $className();
-            $classObject->systemPath = $systemPath;
 
             $classObject->render($params);
         }

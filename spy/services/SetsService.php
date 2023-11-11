@@ -15,13 +15,11 @@ class SetsService
     private SetsRepository $_setsRepository;
     private WordsRepository $_wordsRepository;
 
-    public function __construct(string $systemPath)
+    public function __construct()
     {
         $this->_setsRepository = new SetsRepository();
-        $this->_setsRepository->systemPath = $systemPath;
         $this->_wordsRepository = new WordsRepository();
-        $this->_wordsRepository->systemPath = $systemPath;
-        $this->_usersService = new UsersService($systemPath);
+        $this->_usersService = new UsersService();
     }
 
     public function getSet(int $setId): object
@@ -56,7 +54,7 @@ class SetsService
                     $word = new Word(null, $set->id, $value->word);
                     $this->_wordsRepository->insertItemToDB($word);
                 } elseif ($this->validateWord($value, $set)) {
-                    $this->_wordsRepository->updateItemInDB($$value);
+                    $this->_wordsRepository->updateItemInDB($value);
                 }
             }
 

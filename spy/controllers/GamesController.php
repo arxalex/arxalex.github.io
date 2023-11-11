@@ -3,6 +3,8 @@
 namespace controllers;
 
 use framework\endpoints\BaseEndpoint;
+use models\Game;
+use models\User;
 use services\GamesService;
 
 class GamesController extends BaseEndpoint
@@ -12,14 +14,14 @@ class GamesController extends BaseEndpoint
     public function __construct()
     {
         parent::__construct();
-        $this->_gamesService = new GamesService($this->systemPath);
+        $this->_gamesService = new GamesService();
     }
 
     public function defaultParams()
     {
         return [
             'method' => "",
-            'user' => null,
+            'user' => [],
             'game' => null,
             'userId' => null
         ];
@@ -27,14 +29,15 @@ class GamesController extends BaseEndpoint
 
     public function build()
     {
-        $game = $this->getParam('game');
-        $user = $this->getParam('user');
+        $game = Game::arrayToObject($this->getParam('game'));
+        $user = User::arrayToObject($this->getParam('user'));
         $userId = $this->getParam('userId');
         $method = $this->getParam('method');
+
         if ($method == "getGameInfo") {
             return $this->_gamesService->getGameInfo($game, $user);
         } elseif ($method == "generateGame") {
-            return $this->_gamesService->generateGame();
+            return $this->_gamesService->generateGame($user);
         } elseif ($method == "joinGame") {
             return $this->_gamesService->joinGame($game, $user);
         } elseif ($method == "quitFromGame") {

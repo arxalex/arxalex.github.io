@@ -16,21 +16,25 @@ class GamesService
     private UsersService $_usersService;
     private SetsService $_setsService;
 
-    public function __construct(string $systemPath)
+    public function __construct()
     {
         $this->_gamesRepository = new GamesRepository();
-        $this->_gamesRepository->systemPath = $systemPath;
         $this->_gameUsersRepository = new GameUsersRepository();
-        $this->_gameUsersRepository->systemPath = $systemPath;
-        $this->_usersService = new UsersService($systemPath);
-        $this->_setsService = new SetsService($systemPath);
+        $this->_usersService = new UsersService();
+        $this->_setsService = new SetsService();
     }
 
-    public function generateGame(): Game
+    public function generateGame(User $user): ?Game
     {
-        $user = new Game(null, StringHelper::generateRsndomString(6), null, null, null);
-        $this->_gamesRepository->insertItemToDB($user);
-        return $this->_gamesRepository->getLastInsertedItem();
+        if ($this->_usersService->isUserExists($user)) {
+            $game = new Game(null, StringHelper::generateRsndomString(6), null, null, null);
+            $this->_gamesRepository->insertItemToDB($game);
+            $gameFromDB = $this->_gamesRepository->getLastInsertedItem();
+            $gameUser = new GameUser(null, $user->id, $gameFromDB->id, null, true);
+            $this->_gameUsersRepository->insertItemToDB($gameUser);
+            return $gameFromDB;
+        }
+        return null;
     }
 
     public function getGameInfo(Game $game, User $user): ?Game
@@ -76,9 +80,24 @@ class GamesService
         if (!$this->isGameStarted($game) && $this->isUserGameOwner($game->id, $user)) {
             $gameFromDb = $this->_gamesRepository->getItemFromDB($game->id);
             $gameFromDb->started = true;
+
             $setAndWords = $this->_setsService->getSet($gameFromDb->setid);
             $gameFromDb->wordid = $this->_setsService->getRandomWord($setAndWords)->id;
+
             $this->_gamesRepository->updateItemInDB($gameFromDb);
+
+            $gameUsersFromDB = $this->_gameUsersRepository->getItemsFromDB(['gameid' => [$game->id], 'owner' => [false]]);
+            $nextSpy = rand(0, count($gameUsersFromDB) - 1);
+            foreach ($gameUsersFromDB as $key => $gameUserFromDB){
+                if($gameUserFromDB->spy) {
+                    $gameUserFromDB->spy = false;
+                    $this->_gameUsersRepository->updateItemInDB($gameUserFromDB);
+                }
+                if($key == $nextSpy){
+                    $gameUserFromDB->spy = true;
+                    $this->_gameUsersRepository->updateItemInDB($gameUserFromDB);
+                }
+            }
             return true;
         }
         return false;

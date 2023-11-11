@@ -5,7 +5,6 @@ namespace framework\endpoints;
 class BaseEndpoint
 {
     private array $params;
-    public string $systemPath;
 
     /**
      * Create object of endpoint
@@ -89,7 +88,7 @@ class BaseEndpoint
 
         $externalParamsToAdd = [];
         foreach ($defaultParams as $key => $value) {
-            if (array_key_exists($key, $externalParams) && $externalParams[$key] !== null) {
+            if ($externalParams !== null && array_key_exists($key, $externalParams) && $externalParams[$key] !== null) {
                 $externalParamsToAdd[$key] = $externalParams[$key];
             }
         }

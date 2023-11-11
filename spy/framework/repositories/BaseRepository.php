@@ -3,6 +3,7 @@
 namespace framework\repositories;
 
 use framework\database\DatabaseRequest;
+use framework\utils\ConstantsHelper;
 use framework\utils\NumericHelper;
 use framework\utils\SqlHelper;
 use PDO;
@@ -11,7 +12,6 @@ abstract class BaseRepository
 {
     protected string $className;
     protected string $tableName;
-    public string $systemPath;
 
     public function __construct()
     {
@@ -20,7 +20,7 @@ abstract class BaseRepository
     {
         $table = $this->tableName;
         $query = "select * from `$table` where id = $id";
-        $connection = new DatabaseRequest($query, self::$systemPath);
+        $connection = new DatabaseRequest($query);
         $connection->execute();
         $response = $connection->fetchObject($this->className);
         return $response;
@@ -29,7 +29,7 @@ abstract class BaseRepository
     {
         $table = $this->tableName;
         $query = "SELECT * FROM `$table` ORDER BY `id` DESC LIMIT 1";
-        $connection = new DatabaseRequest($query, self::$systemPath);
+        $connection = new DatabaseRequest($query);
         $connection->execute();
         $response = $connection->fetchObject($this->className);
         return $response;
@@ -53,7 +53,7 @@ abstract class BaseRepository
             $query .= " LIMIT $limit OFFSET $offset";
         }
 
-        $connection = new DatabaseRequest($query, self::$systemPath);
+        $connection = new DatabaseRequest($query);
         $connection->execute();
         $response = $connection->fetchAll(PDO::FETCH_CLASS, $this->className);
         return $response;
@@ -62,7 +62,7 @@ abstract class BaseRepository
     {
         $table = $this->tableName;
         $query = "INSERT INTO `$table` " . SqlHelper::insertObjects([$item]);
-        return (new DatabaseRequest($query, self::$systemPath))->execute();
+        return (new DatabaseRequest($query))->execute();
     }
     public function updateItemInDB($item): bool
     {
@@ -72,7 +72,7 @@ abstract class BaseRepository
             . " WHERE " . SqlHelper::whereCreate([
                 'id' => [$item->id]
             ]);
-        return (new DatabaseRequest($query, self::$systemPath))->execute();
+        return (new DatabaseRequest($query))->execute();
     }
     public function deleteItem($item): bool
     {
@@ -80,7 +80,7 @@ abstract class BaseRepository
         $query = "DELETE FROM `$table` WHERE " . SqlHelper::whereCreate([
             'id' => [$item->id]
         ]);
-        return (new DatabaseRequest($query, self::$systemPath))->execute();
+        return (new DatabaseRequest($query))->execute();
     }
     public function count(array $where = []): int
     {
@@ -97,7 +97,7 @@ abstract class BaseRepository
             $query = "select count(*) from `$table`";
         }
 
-        $connection = new DatabaseRequest($query, self::$systemPath);
+        $connection = new DatabaseRequest($query);
         $connection->execute();
         $response = NumericHelper::toInt($connection->fetch()['count(*)']);
         return $response;

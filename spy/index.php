@@ -27,7 +27,9 @@ foreach($namespaces as $value){
     $loader->register();
 }
 
-Router::resolveRoute($uri_string, "system");
+error_reporting(E_ERROR | E_PARSE);
+
+Router::resolveRoute($uri_string);
 
 
 

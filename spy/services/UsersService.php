@@ -9,10 +9,9 @@ use repository\UsersRepository;
 class UsersService
 {
     private UsersRepository $_usersRepository;
-    public function __construct(string $systemPath)
+    public function __construct()
     {
         $this->_usersRepository = new UsersRepository();
-        $this->_usersRepository->systemPath = $systemPath;
     }
 
     public function generateUser(): User

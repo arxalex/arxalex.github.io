@@ -5,7 +5,6 @@ namespace framework\renders;
 class BaseRender
 {
     private array $params;
-    public string $systemPath;
 
     /**
      * Create object of block
@@ -89,7 +88,7 @@ class BaseRender
 
         $externalParamsToAdd = [];
         foreach ($defaultParams as $key => $value) {
-            if (array_key_exists($key, $externalParams) && $externalParams[$key] != null) {
+            if ($externalParams !== null && array_key_exists($key, $externalParams) && $externalParams[$key] != null) {
                 $externalParamsToAdd[$key] = $externalParams[$key];
             }
         }

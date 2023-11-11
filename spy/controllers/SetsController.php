@@ -3,30 +3,36 @@
 namespace controllers;
 
 use framework\endpoints\BaseEndpoint;
+use models\Set;
+use models\User;
+use models\Word;
 use services\SetsService;
 
 class SetsController extends BaseEndpoint
 {
     private SetsService $_setsService;
+
     public function __construct()
     {
         parent::__construct();
-        $this->_setsService = new SetsService($this->systemPath);
+        $this->_setsService = new SetsService();
     }
+
     public function defaultParams()
     {
         return [
             'method' => "",
-            'set' => null, // Set
-            'user' => null, // User
+            'set' => [], // Set
+            'user' => [], // User
             'words' => [] // array of Word
         ];
     }
+
     public function build()
     {
-        $set = $this->getParam('set');
-        $words = $this->getParam('words');
-        $user = $this->getParam('user');
+        $set = Set::arrayToObject($this->getParam('set'));
+        $words = Word::arrayToObjects($this->getParam('words'));
+        $user = User::arrayToObject($this->getParam('user'));
         $method = $this->getParam('method');
 
         if ($method == "getSet") {

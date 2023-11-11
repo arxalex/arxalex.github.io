@@ -2,28 +2,37 @@
     {
         "routeName": "",
         "routeType": "default",
+        "className": "",
         "contants": [
             {
-                "routeName": "controllers",
+                "routeName": "spy",
                 "routeType": "default",
+                "className": "",
                 "contants": [
                     {
-                        "routeName": "game",
+                        "routeName": "controllers",
                         "routeType": "default",
-                        "className": "controllers\\GamesController",
-                        "contants": []
-                    },
-                    {
-                        "routeName": "set",
-                        "routeType": "default",
-                        "className": "controllers\\SetsController",
-                        "contants": []
-                    },
-                    {
-                        "routeName": "user",
-                        "routeType": "default",
-                        "className": "controllers\\UsersController",
-                        "contants": []
+                        "className": "",
+                        "contants": [
+                            {
+                                "routeName": "game",
+                                "routeType": "default",
+                                "className": "controllers\\GamesController",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "set",
+                                "routeType": "default",
+                                "className": "controllers\\SetsController",
+                                "contants": []
+                            },
+                            {
+                                "routeName": "user",
+                                "routeType": "default",
+                                "className": "controllers\\UsersController",
+                                "contants": []
+                            }
+                        ]
                     }
                 ]
             }
