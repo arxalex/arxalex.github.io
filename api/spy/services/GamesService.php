@@ -39,7 +39,7 @@ class GamesService
 
     public function getGameInfo(Game $game, User $user): ?Game
     {
-        if (!$this->isUserInGame($game->id, $user)) {
+        if ($this->isUserInGame($game->id, $user)) {
             $gameFromDb = $this->_gamesRepository->getItemFromDB($game->id);
             if ($this->isSpy($game, $user)) {
                 $gameFromDb->wordid = null;
