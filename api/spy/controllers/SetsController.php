@@ -43,6 +43,8 @@ class SetsController extends BaseEndpoint
             return $this->_setsService->updateSet($set, $words, $user);
         } elseif ($method == "deleteSet") {
             return $this->_setsService->deleteSet($set->id, $user);
+        } elseif ($method == "getList") {
+            return $this->_setsService->getList($user);
         }
 
         return null;

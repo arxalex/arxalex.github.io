@@ -103,4 +103,13 @@ class SetsService
     {
         return $setAndWords->words[rand(0, count($setAndWords->words) - 1)];
     }
+
+    public function getList(User $user): array
+    {
+        if ($this->_usersService->isUserExists($user)) {
+            return $this->_setsRepository->getItemsFromDB(['userid' => [$user->id]]);
+        }
+
+        return [];
+    }
 }
