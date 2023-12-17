@@ -4,9 +4,12 @@ namespace framework\utils;
 
 class StringHelper
 {
-    public static function generateRsndomString(int $length = 6): string
+    private const ALL_CHARS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    private const CAPS_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    public static function generateRsndomString(int $length = 6, bool $onlyCaps = false): string
     {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $characters = $onlyCaps ? self::CAPS_CHARS : self::ALL_CHARS;
         $charactersLength = strlen($characters);
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {

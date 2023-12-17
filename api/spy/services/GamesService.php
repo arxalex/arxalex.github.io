@@ -27,7 +27,7 @@ class GamesService
     public function generateGame(User $user): ?Game
     {
         if ($this->_usersService->isUserExists($user)) {
-            $game = new Game(null, StringHelper::generateRsndomString(6), null, null, null);
+            $game = new Game(null, StringHelper::generateRsndomString(6, true), null, null, null);
             $this->_gamesRepository->insertItemToDB($game);
             $gameFromDB = $this->_gamesRepository->getLastInsertedItem();
             $gameUser = new GameUser(null, $user->id, $gameFromDB->id, null, true);
@@ -135,6 +135,11 @@ class GamesService
         return false;
     }
 
+    public function isAdmin(Game $game, User $user): bool
+    {
+        return $this->isUserGameOwner($game->id, $user);
+    }
+
     private function isGameExists(Game $game): bool
     {
         $gameFromDb = $this->_gamesRepository->getItemFromDB($game->id);
@@ -160,7 +165,7 @@ class GamesService
     {
         if ($this->_usersService->isUserExists($user)) {
             $gameUser = $this->getGameUser($gameId, $user->id);
-            return $gameUser != null && $gameUser[0]->owner == true;
+            return $gameUser != null && $gameUser->owner == true;
         }
         return false;
     }

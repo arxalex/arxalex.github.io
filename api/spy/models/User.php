@@ -17,11 +17,14 @@ class User extends BaseModel
         $this->pass = $pass;
     }
 
-    public static function arrayToObject(array $DTO): self
+    public static function arrayToObject(?array $DTO): ?self
     {
+        if($DTO == null){
+            return null;
+        }
         $object = new self();
         foreach ($DTO as $key => $value) {
-            if (key_exists($key, self::$keys)) {
+            if (in_array($key, self::$keys)) {
                 $object->$key = $value;
             }
         }

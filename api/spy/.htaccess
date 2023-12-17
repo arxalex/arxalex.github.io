@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteBase /api/spy/
+RewriteRule ^(.*)$ index.php [L]

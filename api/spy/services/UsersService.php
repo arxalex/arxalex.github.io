@@ -16,7 +16,7 @@ class UsersService
 
     public function generateUser(): User
     {
-        $user = new User(null, StringHelper::generateRsndomString(6));
+        $user = new User(null, StringHelper::generateRsndomString(6, true));
         $this->_usersRepository->insertItemToDB($user);
         return $this->_usersRepository->getLastInsertedItem();
     }

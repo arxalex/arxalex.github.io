@@ -21,7 +21,7 @@ class GamesController extends BaseEndpoint
     {
         return [
             'method' => "",
-            'user' => [],
+            'user' => null,
             'game' => null,
             'userId' => null
         ];
@@ -50,6 +50,8 @@ class GamesController extends BaseEndpoint
             return $this->_gamesService->kickUser($game, $user, $userId);
         } elseif ($method == "changeSet") {
             return $this->_gamesService->changeSet($game, $user);
+        } elseif ($method == 'isAdmin') {
+            return $this->_gamesService->isAdmin($game, $user);
         }
 
         return null;
