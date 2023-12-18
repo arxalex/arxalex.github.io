@@ -2,6 +2,7 @@
 
 namespace services;
 
+use framework\utils\ListHelper;
 use models\Set;
 use models\User;
 use models\Word;
@@ -49,12 +50,21 @@ class SetsService
     {
         if ($this->isUserOwner($set, $user)) {
             $this->_setsRepository->updateItemInDB($set);
+            $wordsInDb = $this->_wordsRepository->getItemsFromDB(['setid' => [$set->id]]);
+            $wordsTemp = [];
             foreach ($words as $value) {
                 if ($value->id == null) {
                     $word = new Word(null, $set->id, $value->word);
                     $this->_wordsRepository->insertItemToDB($word);
                 } elseif ($this->validateWord($value, $set)) {
+                    $wordsTemp[] = $value->id;
                     $this->_wordsRepository->updateItemInDB($value);
+                }
+            }
+
+            foreach ($wordsInDb as $word){
+                if(!in_array($word->id, $wordsTemp)){
+                    $this->_wordsRepository->deleteItem($word);
                 }
             }
 
