@@ -14,9 +14,9 @@ class UsersService
         $this->_usersRepository = new UsersRepository();
     }
 
-    public function generateUser(): User
+    public function generateUser(string $name): User
     {
-        $user = new User(null, StringHelper::generateRsndomString(6, true));
+        $user = new User(null, StringHelper::generateRsndomString(6, true), $name);
         $this->_usersRepository->insertItemToDB($user);
         return $this->_usersRepository->getLastInsertedItem();
     }
@@ -29,5 +29,25 @@ class UsersService
 
     public function getUser(int $id) : User {
         return $this->_usersRepository->getItemFromDB($id);
+    }
+
+    public function getUserInfo(User $user) : ?User {
+        if($this->isUserExists($user)) {
+            return $this->_usersRepository->getItemFromDB($user->id);
+        }
+
+        return null;
+    }
+
+    public function changeName(User $user): bool
+    {
+        if($this->isUserExists($user)) {
+            $userFromDb = $this->_usersRepository->getItemFromDB($user->id);
+            $userFromDb->name = $user->name;
+            $this->_usersRepository->updateItemInDB($userFromDb);
+            return true;
+        }
+
+        return false;
     }
 }

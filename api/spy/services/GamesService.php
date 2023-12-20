@@ -27,7 +27,7 @@ class GamesService
     public function generateGame(User $user): ?Game
     {
         if ($this->_usersService->isUserExists($user)) {
-            $game = new Game(null, StringHelper::generateRsndomString(6, true), null, null, null);
+            $game = new Game(null, StringHelper::generateRsndomString(6, true), null, null, null, null, null, null);
             $this->_gamesRepository->insertItemToDB($game);
             $gameFromDB = $this->_gamesRepository->getLastInsertedItem();
             $gameUser = new GameUser(null, $user->id, $gameFromDB->id, null, true);
@@ -43,6 +43,10 @@ class GamesService
             $gameFromDb = $this->_gamesRepository->getItemFromDB($game->id);
             if ($this->isSpy($game, $user)) {
                 $gameFromDb->wordid = null;
+            }
+            if (!$gameFromDb->infinitemode && $gameFromDb->stoptime <= time()){
+                $this->stopGameSuper($game);
+                $gameFromDb = $this->_gamesRepository->getItemFromDB($game->id);
             }
 
             return $gameFromDb;
@@ -84,6 +88,10 @@ class GamesService
             $setAndWords = $this->_setsService->getSet($gameFromDb->setid);
             $gameFromDb->wordid = $this->_setsService->getRandomWord($setAndWords)->id;
 
+            if(!$gameFromDb->infinitemode){
+                $gameFromDb->stoptime = time() + $gameFromDb->duration;
+            }
+
             $this->_gamesRepository->updateItemInDB($gameFromDb);
 
             $gameUsersFromDB = $this->_gameUsersRepository->getItemsFromDB(['gameid' => [$game->id], 'owner' => [false]]);
@@ -108,6 +116,7 @@ class GamesService
         if ($this->isGameStarted($game) && $this->isUserGameOwner($game->id, $user)) {
             $game = $this->_gamesRepository->getItemFromDB($game->id);
             $game->started = false;
+            $game->stoptime = null;
             $this->_gamesRepository->updateItemInDB($game);
             return true;
         }
@@ -123,11 +132,13 @@ class GamesService
         return false;
     }
 
-    public function changeSet(Game $game, User $user): bool
+    public function changeMode(Game $game, User $user): bool
     {
         if (!$this->isGameStarted($game) && $this->isUserGameOwner($game->id, $user)) {
             $gameFromDb = $this->_gamesRepository->getItemFromDB($game->id);
             $gameFromDb->setid = $game->setid;
+            $gameFromDb->duration = $game->duration;
+            $gameFromDb->infinitemode = $game->infinitemode;
             $this->_gamesRepository->updateItemInDB($gameFromDb);
             return true;
         }
@@ -181,6 +192,18 @@ class GamesService
         if ($this->isUserInGame($game->id, $user) && $this->isGameStarted($game)) {
             $gameUser = $this->getGameUser($game->id, $user->id);
             return $gameUser->spy;
+        }
+        return false;
+    }
+
+    private function stopGameSuper(Game $game): bool
+    {
+        if ($this->isGameStarted($game)) {
+            $game = $this->_gamesRepository->getItemFromDB($game->id);
+            $game->started = false;
+            $game->stoptime = null;
+            $this->_gamesRepository->updateItemInDB($game);
+            return true;
         }
         return false;
     }

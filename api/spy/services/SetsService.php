@@ -6,6 +6,7 @@ use framework\utils\ListHelper;
 use models\Set;
 use models\User;
 use models\Word;
+use repository\GamesRepository;
 use repository\SetsRepository;
 use repository\WordsRepository;
 use stdClass;
@@ -15,12 +16,14 @@ class SetsService
     private UsersService $_usersService;
     private SetsRepository $_setsRepository;
     private WordsRepository $_wordsRepository;
+    private GamesRepository $_gamesRepository;
 
     public function __construct()
     {
         $this->_setsRepository = new SetsRepository();
         $this->_wordsRepository = new WordsRepository();
         $this->_usersService = new UsersService();
+        $this->_gamesRepository = new GamesRepository();
     }
 
     public function getSet(int $setId): object
@@ -46,7 +49,7 @@ class SetsService
         return null;
     }
 
-    public function updateSet(Set $set, array $words, User $user): ?object
+    public function updateSet(Set $set, array $words, User $user): bool
     {
         if ($this->isUserOwner($set, $user)) {
             $this->_setsRepository->updateItemInDB($set);
@@ -68,16 +71,21 @@ class SetsService
                 }
             }
 
-            return $this->getSet($set->id);
+            return true;
         }
 
-        return null;
+        return false;
     }
 
     public function deleteSet(int $setId, User $user): bool
     {
         $setAndWords = $this->getSet($setId);
         if ($this->isUserOwner($setAndWords->set, $user)) {
+            $games = $this->_gamesRepository->getItemsFromDB(['setid' => [$setId]]);
+            foreach ($games as $game){
+                $game->setid = 0;
+                $this->_gamesRepository->updateItemInDB($game);
+            }
             $words = $setAndWords->words;
             foreach ($words as $word) {
                 $this->_wordsRepository->deleteItem($word);
@@ -98,12 +106,12 @@ class SetsService
         return false;
     }
 
-    public function getWord(int $id)
+    public function getWord(int $id): Word
     {
         return $this->_wordsRepository->getItemFromDB($id);
     }
 
-    public function validateWord(Word $word, Set $set)
+    public function validateWord(Word $word, Set $set): bool
     {
         $wordFromDb = $this->getWord($word->id);
         return $word->setid == $wordFromDb->setid && $set->id == $word->setid;
@@ -121,5 +129,10 @@ class SetsService
         }
 
         return [];
+    }
+
+    public function getListPublic(): array
+    {
+        return $this->_setsRepository->getItemsFromDB(['userid' => [0]]);
     }
 }

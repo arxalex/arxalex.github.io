@@ -48,8 +48,8 @@ class GamesController extends BaseEndpoint
             return $this->_gamesService->stopGame($game, $user);
         } elseif ($method == "kickUser") {
             return $this->_gamesService->kickUser($game, $user, $userId);
-        } elseif ($method == "changeSet") {
-            return $this->_gamesService->changeSet($game, $user);
+        } elseif ($method == "changeMode") {
+            return $this->_gamesService->changeMode($game, $user);
         } elseif ($method == 'isAdmin') {
             return $this->_gamesService->isAdmin($game, $user);
         }

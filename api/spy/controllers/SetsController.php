@@ -45,6 +45,8 @@ class SetsController extends BaseEndpoint
             return $this->_setsService->deleteSet($set->id, $user);
         } elseif ($method == "getList") {
             return $this->_setsService->getList($user);
+        } elseif ($method == "getListPublic") {
+            return $this->_setsService->getListPublic();
         }
 
         return null;

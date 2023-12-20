@@ -7,14 +7,17 @@ use framework\models\BaseModel;
 class User extends BaseModel
 {
     public ?string $pass;
+    public ?string $name;
 
     public function __construct(
         ?int    $id = null,
-        ?string $pass = null
+        ?string $pass = null,
+        ?string $name = null
     )
     {
         parent::__construct($id);
         $this->pass = $pass;
+        $this->name = $name;
     }
 
     public static function arrayToObject(?array $DTO): ?self
@@ -31,5 +34,5 @@ class User extends BaseModel
         return $object;
     }
 
-    protected static array $keys = ['id', 'pass'];
+    protected static array $keys = ['id', 'pass', 'name'];
 }

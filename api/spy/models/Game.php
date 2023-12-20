@@ -10,13 +10,19 @@ class Game extends BaseModel
     public ?int $setid;
     public ?bool $started;
     public ?int $wordid;
+    public ?int $stoptime;
+    public ?bool $infinitemode;
+    public ?int $duration;
 
     public function __construct(
         ?int    $id = null,
         ?string $pass = null,
         ?int    $setid = null,
         ?bool   $started = null,
-        ?int    $wordid = null
+        ?int    $wordid = null,
+        ?int    $stoptime = null,
+        ?bool   $infinitemode = null,
+        ?int    $duration = null
     )
     {
         parent::__construct($id);
@@ -24,6 +30,9 @@ class Game extends BaseModel
         $this->setid = $setid;
         $this->started = $started;
         $this->wordid = $wordid;
+        $this->stoptime = $stoptime;
+        $this->infinitemode = $infinitemode;
+        $this->duration = $duration;
     }
 
     public static function arrayToObject(?array $DTO): ?self
@@ -40,5 +49,5 @@ class Game extends BaseModel
         return $object;
     }
 
-    protected static array $keys = ['id', 'pass', 'setid', 'started', 'wordid'];
+    protected static array $keys = ['id', 'pass', 'setid', 'started', 'wordid', 'stoptime', 'infinitemode', 'duration'];
 }
