@@ -31,6 +31,18 @@ class UsersService
         return $this->_usersRepository->getItemFromDB($id);
     }
 
+    public function getUsers(array $ids) : array {
+        $users = $this->_usersRepository->getItemsFromDB(['id' => $ids]);
+        $result = [];
+        foreach ($users as $user){
+            $user->pass = '';
+            $result[] = $user;
+        }
+
+        return $result;
+    }
+
+
     public function getUserInfo(User $user) : ?User {
         if($this->isUserExists($user)) {
             return $this->_usersRepository->getItemFromDB($user->id);

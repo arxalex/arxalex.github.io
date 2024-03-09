@@ -2,6 +2,7 @@
 
 namespace services;
 
+use framework\utils\ListHelper;
 use framework\utils\StringHelper;
 use models\Game;
 use models\GameUser;
@@ -94,7 +95,7 @@ class GamesService
 
             $this->_gamesRepository->updateItemInDB($gameFromDb);
 
-            $gameUsersFromDB = $this->_gameUsersRepository->getItemsFromDB(['gameid' => [$game->id], 'owner' => [false]]);
+            $gameUsersFromDB = $this->_gameUsersRepository->getItemsFromDB(['gameid' => [$game->id], 'owner' => [0]]);
             $nextSpy = rand(0, count($gameUsersFromDB) - 1);
             foreach ($gameUsersFromDB as $key => $gameUserFromDB){
                 if($gameUserFromDB->spy) {
@@ -144,6 +145,16 @@ class GamesService
         }
 
         return false;
+    }
+
+    public function getUsers(Game $game, User $user): array
+    {
+        if ($this->isUserGameOwner($game->id, $user)) {
+            $gameUsersFromDB = $this->_gameUsersRepository->getItemsFromDB(['gameid' => [$game->id], 'owner' => [0]]);
+            return $this->_usersService->getUsers(ListHelper::getColumn($gameUsersFromDB, 'userid'));
+        }
+
+        return [];
     }
 
     public function isAdmin(Game $game, User $user): bool

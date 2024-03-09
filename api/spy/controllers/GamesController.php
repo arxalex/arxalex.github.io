@@ -52,6 +52,8 @@ class GamesController extends BaseEndpoint
             return $this->_gamesService->changeMode($game, $user);
         } elseif ($method == 'isAdmin') {
             return $this->_gamesService->isAdmin($game, $user);
+        } elseif ($method == 'getUsers') {
+            return $this->_gamesService->getUsers($game, $user);
         }
 
         return null;
