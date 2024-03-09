@@ -373,7 +373,7 @@ var app = new Vue({
     },
     computed: {
         link: function () {
-            return 'https://apps.arxalex.co/point-poker?teamid=' + this.sessionData.teamid;
+            return 'https://apps.arxalex.com/point-poker?teamid=' + this.sessionData.teamid;
         },
         qrsrc: function () {
             return "https://api.qrserver.com/v1/create-qr-code/?data=" + this.link + "&amp;size=100x100";
