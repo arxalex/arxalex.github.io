@@ -19,4 +19,4 @@ jobs:
           local_dir: "./"
           remote_dir: "./"
           delete: "false"
-          exlude: ".github/ .idea/"
+          exclude: ".github/ .idea/ .git/ Readme.md .gitignore"
