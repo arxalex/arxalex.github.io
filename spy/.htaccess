@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase /spy/
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /spy/index.html [L]
