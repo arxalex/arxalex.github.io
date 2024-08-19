@@ -1,0 +1,14 @@
+RewriteEngine On
+RewriteBase /secret-santa/
+
+# Allow access to index.html directly
+RewriteRule ^index\.html$ - [L]
+
+# Block direct access to config.json, except from .php files
+RewriteCond %{REQUEST_URI} ^/secret-santa/config\.json$
+RewriteRule ^ - [F,L]
+
+# Handle other requests by sending them to index.html if not a file or directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /secret-santa/index.html [L]

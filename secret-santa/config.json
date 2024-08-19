@@ -1,0 +1,7 @@
+{
+    "useToken": false,
+    "DB_host": "localhost",
+    "DB_dbname": "arxalex_secsanta",
+    "DB_username": "arxalex_secsanta",
+    "DB_password": "PLACEHOLDER"
+}

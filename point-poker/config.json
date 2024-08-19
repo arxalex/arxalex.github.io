@@ -1,0 +1,7 @@
+{
+    "useToken": false,
+    "DB_host": "localhost",
+    "DB_dbname": "arxalex_poipoker",
+    "DB_username": "arxalex_poipoker",
+    "DB_password": "PLACEHOLDER"
+}

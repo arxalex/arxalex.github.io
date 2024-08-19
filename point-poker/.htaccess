@@ -1,0 +1,14 @@
+RewriteEngine On
+RewriteBase /point-poker/
+
+# Allow access to index.html directly
+RewriteRule ^index\.html$ - [L]
+
+# Block direct access to config.json, except from .php files
+RewriteCond %{REQUEST_URI} ^/point-poker/config\.json$
+RewriteRule ^ - [F,L]
+
+# Handle other requests by sending them to index.html if not a file or directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /point-poker/index.html [L]
