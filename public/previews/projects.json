@@ -1,0 +1,27 @@
+{
+  "projects": [
+    {
+      "title": "priceapp",
+      "description": "Mobile application that help find best price",
+      "previewImage": "previews/priceapp.png",
+      "altText": "priceapp",
+      "appStoreLink": "https://apps.apple.com/ua/app/priceapp/id6466097932",
+      "playMarketLink": "https://play.google.com/store/apps/details?id=co.arxalex.priceapp"
+    },
+    {
+      "title": "pharminal",
+      "description": "Organize Your Home Pharmacy Effortlessly",
+      "previewImage": "previews/pharminal.jpg",
+      "altText": "pharminal",
+      "appStoreLink": "https://apps.apple.com/ua/app/pharminal/id6739819767"
+    },
+    {
+      "title": "Secret Santa",
+      "description": "Online app for randomise secret santas",
+      "previewImage": "previews/secret-santa.png",
+      "altText": "Secret Santa",
+      "webAppLink": "https://apps.arxalex.com/secret-santa",
+      "githubLink": "https://github.com/arxalex/secret-santa"
+    }
+  ]
+}

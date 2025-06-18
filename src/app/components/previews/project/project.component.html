@@ -1,0 +1,35 @@
+<div class="mt-4">
+  <article class="card">
+    <img class="card-img-top" [src]="project.previewImage" [alt]="project.altText">
+    <div class="card-body">
+      <h3 class="card-title h5 mb-3">{{ project.title }}</h3>
+      <p class="card-text flex-grow-1">{{ project.description }}</p>
+      @if (project.appStoreLink || project.playMarketLink) {
+        <div>
+          @if (project.appStoreLink) {
+            <a style="display: inline-block; width: 114px; height: 38px;" class="mb-1 me-1"
+               [href]='project.appStoreLink'>
+              <img style="height: 38px;" alt='Get it on App Store'
+                   src="assets/appStore.svg">
+            </a>
+          }
+          @if (project.playMarketLink) {
+            <a style="display: inline-block; width: 126px; height: 38px;" class="mb-1 me-1"
+               [href]='project.playMarketLink'>
+              <img style="height: 56px; margin: -9px;" alt='Get it on Google Play'
+                   src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/>
+            </a>
+          }
+        </div>
+      }
+      @if (project.webAppLink) {
+        <a [href]="project.webAppLink" class="btn btn-primary">Go</a>
+      }
+      @if (project.githubLink) {
+        <a [href]="project.githubLink" class="btn">
+          <i class="fab fa-github"></i>
+        </a>
+      }
+    </div>
+  </article>
+</div>
