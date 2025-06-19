@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {SocialLinksListComponent} from '../social-links-list/social-links-list.component';
+import {SocialLinksListComponent} from './social-links-list/social-links-list.component';
 
 @Component({
   selector: 'app-footer',
@@ -8,5 +8,5 @@ import {SocialLinksListComponent} from '../social-links-list/social-links-list.c
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-
+  year: number = new Date().getFullYear();
 }

@@ -1,0 +1,15 @@
+<a class="mb-1 me-1"
+   [classList]="button.type"
+   [href]='button.link'>
+  @if (button.type === ButtonType.AppStore) {
+    <img style="width: 114px; height: 38px;" alt='Get it on App Store'
+         src="assets/appStore.svg">
+  } @else if (button.type === ButtonType.PlayMarket) {
+    <img style="height: 56px; margin: -9px;" alt='Get it on Google Play'
+         src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/>
+  } @else if (button.type === ButtonType.Github) {
+    <i class="fab fa-github"></i>
+  } @else {
+    <span>{{ button.text }}</span>
+  }
+</a>

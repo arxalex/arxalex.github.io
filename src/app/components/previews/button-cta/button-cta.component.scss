@@ -1,0 +1,31 @@
+@use 'bootstrap/scss/bootstrap';
+
+.primary {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+.secondary {
+  @extend .btn;
+  @extend .btn-secondary;
+}
+
+.app-store {
+  @extend .mb-1;
+  @extend .me-1;
+  display: inline-block;
+  width: 114px;
+  height: 38px;
+}
+
+.play-market {
+  @extend .mb-1;
+  @extend .me-1;
+  display: inline-block;
+  width: 126px;
+  height: 38px;
+}
+
+.github {
+  @extend .btn;
+}

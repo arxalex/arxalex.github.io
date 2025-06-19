@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {ProjectListComponent} from '../../components/previews/project-list/project-list.component';
-import {ContactForm} from '../../components/contact-form/contact-form';
+import {AppsGridComponent} from '../../components/previews/apps-grid/apps-grid.component';
+import {Carousel} from '../../components/previews/carousel/carousel.component';
 
 @Component({
   selector: 'app-main',
-  imports: [ProjectListComponent, ContactForm],
+  imports: [AppsGridComponent, Carousel],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })

@@ -1,0 +1,5 @@
+<div class="row mb-4">
+  @for (project of appPreviewModels; track project.title) {
+    <app-preview [appPreviewModel]="project" class="col-12 col-md-4 mt-4"/>
+  }
+</div>
