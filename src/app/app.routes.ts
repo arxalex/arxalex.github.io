@@ -7,6 +7,10 @@ export const routes: Routes = [
     component: MainPage
   },
   {
+    path: 'blog',
+    component: MainPage
+  },
+  {
     path: '**',
     redirectTo: ''
   }
