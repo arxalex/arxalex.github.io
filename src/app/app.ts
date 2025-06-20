@@ -10,4 +10,6 @@ import {FooterComponent} from './components/footer/footer.component';
   styleUrl: './app.scss'
 })
 export class App {
+  title = 'Arxalex';
+  description = 'Arxalex';
 }
