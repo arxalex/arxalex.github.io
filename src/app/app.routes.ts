@@ -5,5 +5,13 @@ export const routes: Routes = [
   {
     path: '',
     component: MainPage
+  },
+  {
+    path: 'blog',
+    component: MainPage
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
