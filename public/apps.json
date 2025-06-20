@@ -14,7 +14,8 @@
         "type": "play-market",
         "link": "https://play.google.com/store/apps/details?id=co.arxalex.priceapp"
       }
-    ]
+    ],
+    "tags": ["featured"]
   },
   {
     "title": "pharminal",
@@ -26,7 +27,8 @@
         "type": "app-store",
         "link": "https://apps.apple.com/ua/app/pharminal/id6739819767"
       }
-    ]
+    ],
+    "tags": ["featured"]
   },
   {
     "title": "Secret Santa",
@@ -34,7 +36,7 @@
     "previewImage": "previews/secret-santa.png",
     "buttons": [
       {
-        "text": "Go",
+        "text": "Play",
         "type": "primary",
         "link": "https://apps.arxalex.com/secret-santa"
       },
@@ -43,7 +45,8 @@
         "type": "github",
         "link": "https://github.com/arxalex/secret-santa"
       }
-    ]
+    ],
+    "tags": ["popular"]
   },
   {
     "title": "Spy Game",
@@ -51,7 +54,7 @@
     "previewImage": "previews/spy.png",
     "buttons": [
       {
-        "text": "Go",
+        "text": "Play",
         "type": "primary",
         "link": "https://apps.arxalex.com/spy"
       },
@@ -60,7 +63,8 @@
         "type": "github",
         "link": "https://github.com/arxalex/spy-game-client"
       }
-    ]
+    ],
+    "tags": ["new"]
   },
   {
     "title": "Notes",
@@ -68,7 +72,7 @@
     "previewImage": "previews/notes.png",
     "buttons": [
       {
-        "text": "Go",
+        "text": "Write",
         "type": "primary",
         "link": "https://apps.arxalex.com/notes"
       },
@@ -85,7 +89,7 @@
     "previewImage": "previews/mautotest.png",
     "buttons": [
       {
-        "text": "Go",
+        "text": "Write",
         "type": "primary",
         "link": "https://apps.arxalex.com/mautotest"
       },
@@ -104,7 +108,7 @@
     "githubLink": "https://github.com/arxalex/point-poker",
     "buttons": [
       {
-        "text": "Go",
+        "text": "Play",
         "type": "primary",
         "link": "https://apps.arxalex.com/mautotest"
       },
@@ -121,7 +125,7 @@
     "previewImage": "previews/tic-tac-boom.png",
     "buttons": [
       {
-        "text": "Go",
+        "text": "Play",
         "type": "primary",
         "link": "https://apps.arxalex.com/tic-tac-boom"
       },
@@ -138,7 +142,7 @@
     "previewImage": "previews/valentine.png",
     "buttons": [
       {
-        "text": "Go",
+        "text": "Show",
         "type": "primary",
         "link": "https://apps.arxalex.com/valentine"
       },

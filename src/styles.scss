@@ -1,1 +1,70 @@
-/* You can add global styles to this file, and also import other style files */
+$font-family-sans-serif: Helvetica, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+$font-family-base: $font-family-sans-serif;
+
+
+$primary: #0085e3;
+$box-shadow: 0 .25rem .75rem #f4feff;
+$box-shadow-lg: 0 .5rem 1.5rem #f4feff;
+$light: #f5f5f7;
+
+@import "bootstrap/scss/bootstrap";
+
+.btn-primary {
+  color: $white;
+  background-color: $primary;
+  border-color: $primary;
+
+  &:hover, &:focus, &:active {
+    color: $white;
+  }
+}
+
+.btn {
+  @extend .rounded-5;
+  @extend .px-4;
+  @extend .py-2;
+}
+
+.bg-featured {
+  background-color: $light;
+  &.bg-gradient {
+    background-image: linear-gradient(135deg,
+      #cee1ec 20%,
+      #fbfbfe 80%
+    ) !important;
+  }
+}
+
+.bg-blur {
+  backdrop-filter: blur(1rem) saturate(1.2);
+  -webkit-backdrop-filter: blur(1rem) saturate(1.2);
+}
+
+.shadow {
+  box-shadow: $box-shadow;
+}
+
+.shadow-lg {
+  box-shadow: $box-shadow-lg;
+}
+
+.btn-app-store {
+  &.btn {
+    @extend .p-0;
+    @extend .ms-0;
+  }
+}
+
+.btn-play-market {
+  &.btn {
+    @extend .p-0;
+    @extend .ms-0;
+  }
+}
+
+.btn-github {
+  @extend .px-0;
+  &.btn {
+    @extend .px-2;
+  }
+}

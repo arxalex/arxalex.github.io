@@ -1,8 +1,13 @@
-<article class="card rounded-4 border-custom">
+<article class="card rounded-4 border-light shadow bg-light">
   <img class="card-img-top rounded-top-4" [src]="appPreviewModel.previewImage" [alt]="appPreviewModel.title">
+  <div class="tags">
+    @for (tag of appPreviewModel.tags; track tag) {
+      <span class="badge me-1 text-secondary border bg-blur">{{ tag }}</span>
+    }
+  </div>
   <div class="card-body">
-    <h3 class="card-title h5 mb-3">{{ appPreviewModel.title }}</h3>
-    <p class="card-text flex-grow-1">{{ appPreviewModel.description }}</p>
+    <h5 class="card-title mb-3">{{ appPreviewModel.title }}</h5>
+    <p class="card-text">{{ appPreviewModel.description }}</p>
     <app-buttons-inline [buttons]="appPreviewModel.buttons"/>
   </div>
 </article>
