@@ -104,18 +104,16 @@
     "title": "Point poker",
     "description": "Online app for SCRUM",
     "previewImage": "previews/point-poker.png",
-    "webAppLink": "https://apps.arxalex.com/point-poker",
-    "githubLink": "https://github.com/arxalex/point-poker",
     "buttons": [
       {
         "text": "Play",
         "type": "primary",
-        "link": "https://apps.arxalex.com/mautotest"
+        "link": "https://apps.arxalex.com/point-poker"
       },
       {
         "text": "",
         "type": "github",
-        "link": "https://github.com/arxalex/mautotest-ui"
+        "link": "https://github.com/arxalex/point-poker"
       }
     ]
   },
