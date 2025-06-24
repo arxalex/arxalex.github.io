@@ -56,7 +56,7 @@
       {
         "text": "Play",
         "type": "primary",
-        "link": "https://apps.arxalex.com/spy"
+        "link": "https://apps.arxalex.com/spy-game-client"
       },
       {
         "text": "",
@@ -91,7 +91,7 @@
       {
         "text": "Write",
         "type": "primary",
-        "link": "https://apps.arxalex.com/mautotest"
+        "link": "https://apps.arxalex.com/mautotest-ui"
       },
       {
         "text": "",
