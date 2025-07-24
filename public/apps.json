@@ -13,6 +13,11 @@
         "text": "",
         "type": "play-market",
         "link": "https://play.google.com/store/apps/details?id=co.arxalex.priceapp"
+      },
+      {
+        "text": "",
+        "type": "github",
+        "link": "https://github.com/arxalex/priceapp.Mobile"
       }
     ],
     "tags": ["featured"]
