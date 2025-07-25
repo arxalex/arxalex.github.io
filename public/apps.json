@@ -31,6 +31,11 @@
         "text": "",
         "type": "app-store",
         "link": "https://apps.apple.com/ua/app/pharminal/id6739819767"
+      },
+      {
+        "text": "",
+        "type": "github",
+        "link": "https://github.com/arxalex/pharminal"
       }
     ],
     "tags": ["featured"]
